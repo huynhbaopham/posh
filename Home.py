@@ -32,7 +32,6 @@ hide_st_style = """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
 with st.container(border=True):
-    st.write(os.listdir("/etc/ssl/certs"))
     # st.page_link ("pages/1_Check_In.py", label = "Go to Check In", use_container_width=True)
     # st.page_link ("pages/2_Dashboard.py",label= "Go to Dashboard", use_container_width=True)
     st.link_button(
