@@ -3,6 +3,7 @@ from database import *
 import pandas as pd
 from datetime import datetime, timedelta
 from streamlit_option_menu import option_menu
+from streamlit_autorefresh import st_autorefresh
 
 # ---------------Settings -----------------
 
@@ -132,6 +133,7 @@ if selected == "History Logs":
 
 if selected == "Active Session":
     # ------  Active Session ------------------------
+    _count = st_autorefresh(interval=10000, limit=None)
     st.header("Active Session")
     with st.container():
         today = datetime.now() - timedelta(hours=7)
