@@ -3,4 +3,3 @@ compose-dev.yaml
 secrets.toml
 __pycache__/*
 .DS_Store
-poshdb.pem

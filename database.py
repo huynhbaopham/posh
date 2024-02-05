@@ -12,7 +12,7 @@ def poshdb_connect():
         database=st.secrets["connections"]["database"],
         autocommit=True,
         ssl_mode="VERIFY_IDENTITY",
-        ssl={"ca": "/etc/ssl/certs/ca-certificates.crt"},
+        ssl={"ca": ".streamlit/poshdb.pem"},
     )
 
     return db
