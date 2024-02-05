@@ -1,0 +1,6 @@
+streamlit==1.31.0
+streamlit_option_menu==0.3.12
+watchdog==3.0.0
+plotly==5.18.0
+SQLAlchemy==2.0.25
+mysqlclient==2.2.1
