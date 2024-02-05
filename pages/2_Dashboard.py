@@ -8,7 +8,7 @@ from streamlit_autorefresh import st_autorefresh
 # ---------------Settings -----------------
 
 page_title = "Posh Lounge | Dashboard"
-page_icon = "💅"
+page_icon = "amd"
 layout = "centered"
 
 
@@ -43,7 +43,7 @@ def redeem(edited_rows, df):
         if not edited_rows[row]["select"]:
             continue
         if df.at[row, "points"] < 10:
-            st.warning(f"{df.at[row, 'name']} does not have enough points.")
+            st.error(f"{df.at[row, 'name']} does not have enough points.", icon="⚠️")
             continue
         points.append(df.at[row, "points"] - 10)
         phones.append(df.at[row, "phoneNumber"])
@@ -163,7 +163,7 @@ if selected == "Active Session":
         if len(st.session_state.activeList["edited_rows"]) != 0:
             disabled = False
 
-        st.button(
+        redeem = st.button(
             "Redeem",
             on_click=redeem,
             args=(st.session_state.activeList["edited_rows"], entries),
