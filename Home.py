@@ -1,4 +1,6 @@
 import streamlit as st
+import os
+
 
 # ---------------Settings -----------------
 
@@ -9,7 +11,12 @@ layout = "centered"
 
 # -----------------------------------------
 
-st.set_page_config(page_title=page_title, page_icon=page_icon, layout=layout, initial_sidebar_state = "collapsed")
+st.set_page_config(
+    page_title=page_title,
+    page_icon=page_icon,
+    layout=layout,
+    initial_sidebar_state="collapsed",
+)
 st.title("Welcome to Posh Nail Lounge")
 
 # ----- HIDE Streamlit Style --------------
@@ -25,7 +32,18 @@ hide_st_style = """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
 with st.container(border=True):
+    print(os.listdir("/etc/ssl/"))
     # st.page_link ("pages/1_Check_In.py", label = "Go to Check In", use_container_width=True)
     # st.page_link ("pages/2_Dashboard.py",label= "Go to Dashboard", use_container_width=True)
-    st.link_button (label= "Go to Check In", url="/Check_In", use_container_width=True, type="primary")
-    st.link_button (label= "Go to Dashboard", url="/Dashboard", use_container_width=True, type="primary")
+    st.link_button(
+        label="Go to Check In",
+        url="/Check_In",
+        use_container_width=True,
+        type="primary",
+    )
+    st.link_button(
+        label="Go to Dashboard",
+        url="/Dashboard",
+        use_container_width=True,
+        type="primary",
+    )
