@@ -42,14 +42,22 @@ def redeem(edited_rows, df):
         if not edited_rows[row]["select"]:
             continue
         if df.at[row, "points"] < 10:
-            st.warning (f"{df.at[row, "name"]} does not have enough points.")
+            st.warning(f"{df.at[row, 'name']} does not have enough points.")
             continue
         points.append(df.at[row, "points"] - 10)
         phones.append(df.at[row, "phoneNumber"])
 
     return redeemDB(points=points, phones=phones)
 
-selected = option_menu(None, ["Active Session", "History Logs"], icons=["c-circle", "clock-history"], menu_icon="cast", default_index=0, orientation="horizontal")
+
+selected = option_menu(
+    None,
+    ["Active Session", "History Logs"],
+    icons=["c-circle", "clock-history"],
+    menu_icon="cast",
+    default_index=0,
+    orientation="horizontal",
+)
 if selected == "History Logs":
     # ------ Listing Check In Logs -----------------
     st.header("History Log")
@@ -57,8 +65,12 @@ if selected == "History Logs":
     with st.expander("Select date range for log"):
         st.session_state.expanderHelper = "Choose range to retrieve data"
         col1, col2 = st.columns(2)
-        col1.date_input(label="Start date", value="today", format="YYYY-MM-DD", key="sdate")
-        col2.date_input(label="End date", value="today", format="YYYY-MM-DD", key="edate")
+        col1.date_input(
+            label="Start date", value="today", format="YYYY-MM-DD", key="sdate"
+        )
+        col2.date_input(
+            label="End date", value="today", format="YYYY-MM-DD", key="edate"
+        )
         submitted = st.button("Retrieve", use_container_width=True, type="primary")
 
         if submitted:
@@ -71,7 +83,9 @@ if selected == "History Logs":
                 column_config = {
                     "name": "Name",
                     "birthdate": "DoB",
-                    "points": st.column_config.NumberColumn(label="Points", format="%d ⭐️"),
+                    "points": st.column_config.NumberColumn(
+                        label="Points", format="%d ⭐️"
+                    ),
                     "phoneNumber": "Phone",
                     "dateTime": st.column_config.DatetimeColumn(
                         label="Date Time", format="ddd, MMM DD, hh:mm A", timezone="MST"
@@ -79,7 +93,9 @@ if selected == "History Logs":
                 }
                 title = column_config.keys()
                 clients = pd.DataFrame(list(clients), columns=title)
-                st.dataframe(clients, use_container_width=True, column_config=column_config)
+                st.dataframe(
+                    clients, use_container_width=True, column_config=column_config
+                )
 
     # ------ Listing Clients -----------------------
     st.header("Client Info")
