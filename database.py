@@ -18,10 +18,11 @@ def poshdb_connect():
     return db
 
 
-def checkin(phone, client=None):
+def checkin(phone, services, client=None):
     db = poshdb_connect()
     conn = db.cursor()
     try:
+        #get client data from checkin or signup
         if client == None:
             conn.execute(
                 f"SELECT firstName, points FROM Clients WHERE phoneNumber={phone};"
@@ -30,16 +31,22 @@ def checkin(phone, client=None):
         else:
             r = client
 
+        #client exists in DB
         if r != None:
             conn.execute(
                 f"SELECT * FROM CheckIns WHERE DATE(dateTime)=CURDATE() and phoneNumber={phone};"
             )
+            #new checkin of an active session
             if conn.fetchone() == None:
                 conn.execute(
                     f"UPDATE Clients SET points={r[1]+1} WHERE phoneNumber={phone}"
                 )
-
-            conn.execute(f"INSERT INTO CheckIns (phoneNumber) VALUES ({phone});")
+            #insert checkin input
+            if len(services) == 0:
+                conn.execute(f"INSERT INTO CheckIns (phoneNumber) VALUES ({phone});")
+            else:
+                services = ", ".join(services)
+                conn.execute(f"INSERT INTO CheckIns (phoneNumber, services) VALUES ({phone}, '{services}');")
 
     except:
         conn.close()
@@ -60,7 +67,7 @@ def signup(client):
         c = conn.fetchone()
         if c != None:
             conn.close()
-            checkin(phone=client[0], client=c)
+            checkin(phone=client[0], services=client[-1], client=c)
             return 0, c
 
         conn.execute(
@@ -68,9 +75,15 @@ def signup(client):
                      INSERT INTO Clients (phoneNumber, firstName, lastName, birthdate) 
                      VALUES (%s, %s, %s, %s)
                      """,
-            client,
+            client[:-1],
         )
-        conn.execute(f"INSERT INTO CheckIns (phoneNumber) VALUES ({client[0]});")
+        #insert checkin input
+        if len(client[-1]) == 0:
+            conn.execute(f"INSERT INTO CheckIns (phoneNumber) VALUES ({client[0]});")
+        else:
+            services = ", ".join(client[-1])
+            conn.execute(f"INSERT INTO CheckIns (phoneNumber, services) VALUES ({client[0]}, '{services}');")
+
 
     except:
         conn.close()
