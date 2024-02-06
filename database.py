@@ -41,12 +41,12 @@ def checkin(phone, services, client=None):
                 conn.execute(
                     f"UPDATE Clients SET points={r[1]+1} WHERE phoneNumber={phone}"
                 )
-            #insert checkin input
-            if len(services) == 0:
-                conn.execute(f"INSERT INTO CheckIns (phoneNumber) VALUES ({phone});")
-            else:
-                services = ", ".join(services)
-                conn.execute(f"INSERT INTO CheckIns (phoneNumber, services) VALUES ({phone}, '{services}');")
+                #insert checkin input
+                if len(services) == 0:
+                    conn.execute(f"INSERT INTO CheckIns (phoneNumber) VALUES ({phone});")
+                else:
+                    services = ", ".join(services)
+                    conn.execute(f"INSERT INTO CheckIns (phoneNumber, services) VALUES ({phone}, '{services}');")
 
     except:
         conn.close()
