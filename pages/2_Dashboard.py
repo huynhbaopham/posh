@@ -144,6 +144,7 @@ if selected == "Active Session":
             "birthdate": st.column_config.DateColumn(label="DoB", format="MMM DD"),
             "points": st.column_config.NumberColumn(label="Points", format="%d ⭐️"),
             "phoneNumber": "Phone",
+            "services": st.column_config.ListColumn(label="Services"),
             "dateTime": st.column_config.DatetimeColumn(
                 label="Check In", format="hh:mm A", timezone="MST"
             ),

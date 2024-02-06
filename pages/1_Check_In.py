@@ -56,7 +56,7 @@ if selected == "Check In":
     with st.form("checkin_form", clear_on_submit=True):
         phone = st.session_state.InputPhone
         options = ("Pedicure", "Reg. Manicure", "Gel Manicure", "Liquiq full set", "Liquiq Fill", "Full set", "Fill", "Dip", "Wax")
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns([.4, .6])
         col1.text_input(label= "Phone Number", value="", placeholder="(480) 590-6703", max_chars=10, key="phone")
         col2.multiselect(label="Services", options=options, placeholder="Choose your service(s)", key="services")
         

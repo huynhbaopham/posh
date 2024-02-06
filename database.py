@@ -102,7 +102,7 @@ def get_checkins(sdate, edate):
 
     try:
         conn.execute(
-            f"SELECT CONCAT(firstName, ' ', lastName) as name, birthdate, points, Clients.phoneNumber, dateTime FROM Clients, CheckIns WHERE Clients.phoneNumber = CheckIns.phoneNumber AND dateTime BETWEEN '{sdate}' AND '{edate}';"
+            f"SELECT CONCAT(firstName, ' ', lastName) as name, birthdate, points, Clients.phoneNumber, services, dateTime FROM Clients, CheckIns WHERE Clients.phoneNumber = CheckIns.phoneNumber AND dateTime BETWEEN '{sdate}' AND '{edate}';"
         )
         clients = conn.fetchall()
         conn.close()
