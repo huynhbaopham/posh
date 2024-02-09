@@ -88,6 +88,7 @@ if selected == "History Logs":
                         label="Points", format="%d ⭐️"
                     ),
                     "phoneNumber": "Phone",
+                    "services": st.column_config.ListColumn(label="Services"),
                     "dateTime": st.column_config.DatetimeColumn(
                         label="Date Time", format="ddd, MMM DD, hh:mm A", timezone="MST"
                     ),
