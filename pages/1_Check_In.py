@@ -1,8 +1,8 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-import plotly.graph_objects as go
 import calendar
 from datetime import datetime
+from streamlit_autorefresh import st_autorefresh
 from database import *
 
 
@@ -49,7 +49,7 @@ selected = option_menu(
     icons=["box-arrow-in-left", "plus-square"],
     orientation="horizontal",
 )
-
+_count = st_autorefresh(interval=5000, limit=None)
 # ------- Input & Save periods ----
 if selected == "Check In":
     st.header("Check In")
@@ -81,6 +81,7 @@ if selected == "Check In":
     
 # ------- Display periods -----------
 if selected == "Sign Up":
+    
     st.header("Sign Up")
     with st.form("signup_form", clear_on_submit=True):
         options = ("Pedicure", "Reg. Manicure", "Gel Manicure", "Liquiq full set", "Liquiq Fill", "Full set", "Fill", "Dip", "Wax")
