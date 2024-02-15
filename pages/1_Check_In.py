@@ -83,7 +83,7 @@ if selected == "Check In":
 if selected == "Sign Up":
     
     st.header("Sign Up")
-    with st.form("signup_form", clear_on_submit=True):
+    with st.form("signup_form", clear_on_submit=False):
         options = ("Pedicure", "Reg. Manicure", "Gel Manicure", "Liquiq full set", "Liquiq Fill", "Full set", "Fill", "Dip", "Wax")
         phone = st.session_state.InputPhone
         services = st.session_state.InputServices
