@@ -134,7 +134,7 @@ if selected == "History Logs":
 
 if selected == "Active Session":
     # ------  Active Session ------------------------
-    _count = st_autorefresh(interval=10000, limit=None)
+    _count = st_autorefresh(interval=10000, limit=None, key="ActiveSession")
     st.header("Active Session")
     with st.container():
         today = datetime.now() - timedelta(hours=7)
