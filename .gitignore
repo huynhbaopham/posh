@@ -1,5 +1,5 @@
 compose-dev.yaml
 .streamlit/secrets.toml
 secrets.toml
-__pycache__/*
+__pycache__
 .DS_Store
